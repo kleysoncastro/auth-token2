@@ -2,14 +2,22 @@ const User = require("../model/User");
 
 module.exports = {
   async store(req, res) {
-    const { email } = req.body;
+    try {
+      const { nameFirst, lastName, idUser } = req.body;
 
-    let user = await User.findOne({ email });
+      let user = await User.findOne({ idUser });
 
-    if (!user) {
-      user = await User.create({ email });
+      if (user) {
+        return res.status(400).send({ erro: "registered user" });
+      }
+
+      if (!user) {
+        user = await User.create({ idUser, nameFirst, lastName });
+      }
+
+      return res.json({ ok: "User successfully registered" });
+    } catch (err) {
+      res.status(400).send({ erro: "unexpected error, consult administrator" });
     }
-
-    return res.json(user);
   }
 };
