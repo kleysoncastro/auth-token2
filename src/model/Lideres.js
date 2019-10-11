@@ -4,19 +4,20 @@ const bcryptjs = require("bcryptjs");
 const LiderSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    ref: "users"
+    required: true
   },
   lastName: {
     type: String,
-    ref: "users"
+    required: true
   },
   idUser: {
     type: String,
-    require: true
+    unique: true,
+    required: true
   },
   password: {
     type: String,
-    require: true,
+    required: true,
     select: false
   },
   createAt: {
