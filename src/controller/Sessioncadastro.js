@@ -3,7 +3,7 @@ const User = require("../model/User");
 module.exports = {
   async store(req, res) {
     try {
-      const { nameFirst, lastName, idUser } = req.body;
+      const { firstName, lastName, idUser } = req.body;
 
       let user = await User.findOne({ idUser });
 
@@ -12,7 +12,7 @@ module.exports = {
       }
 
       if (!user) {
-        user = await User.create({ idUser, nameFirst, lastName });
+        user = await User.create({ idUser, firstName, lastName });
       }
 
       return res.json({ ok: "User successfully registered" });
