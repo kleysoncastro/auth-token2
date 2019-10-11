@@ -7,11 +7,12 @@ const UserSchema = new mongoose.Schema({
   },
   lastName: {
     type: String,
-    require: true
+    required: true
   },
   idUser: {
     type: String,
-    require: true
+    unique: true,
+    required: true
   },
   dateRegister: {
     type: Date,
